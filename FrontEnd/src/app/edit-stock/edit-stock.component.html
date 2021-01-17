@@ -1,0 +1,283 @@
+<div class="jumbotron text-center">
+  <app-nav-bar></app-nav-bar>
+  <br><br />
+  <div *ngIf="isAdd" class="container">
+    <div class="row centered-form">
+      <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Add Car<small>Only Admin!</small></h3>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    CarId
+                    <input type="number" class="form-control input-sm" #carid
+                    min="0" oninput="validity.valid||(value='');">
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Model
+                    <input type="text" class="form-control input-sm" #model>
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Manufacturer
+                    <input type="text" class="form-control input-sm" #manufacturer>
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Year
+                    <input type="number" class="form-control input-sm" #manufacturerYear
+                    min="0"
+                    oninput="validity.valid||(value='');">
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    dayValue
+                    <input type="number" class="form-control input-sm" #dayValue
+                    min="0"
+                    oninput="validity.valid||(value='');">
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    lateDayValue
+                    <input type="number" class="form-control input-sm" #lateDayValue
+                    min="0"
+                    oninput="validity.valid||(value='');">
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    CarType
+                    <input type="text" class="form-control input-sm" #carType>
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    CurrectMileage
+                    <input type="number" class="form-control input-sm" #currectMileage
+                    min="0"
+                    oninput="validity.valid||(value='');">
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Available -
+                    <select #available>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Proper -
+                    <select #proper>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                Gear
+                <select #gear>
+                  <option value="Automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                </select>
+              </div>
+              <div class="form-group">
+                Picture
+                <input type="text" class="form-control input-sm" #picture>
+              </div>
+              <input type="button" value="Save" class="btn btn-info btn-block"
+                (click)="AddCar(carid.value,model.value, manufacturer.value,manufacturerYear.value,gear.value,dayValue.value,lateDayValue.value, carType.value, available.value, proper.value, currectMileage.value, picture.value)">
+              {{doneEdit}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isEdit" class="container">
+    <div class="row centered-form">
+      <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Edit Car<small>Only Admin!</small></h3>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    CarId
+                    <input type="number" class="form-control input-sm" placeholder="CarId" value="{{currentCar.carId}}"
+                    min="0"
+                    oninput="validity.valid||(value='');"
+                      #carid>
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Model
+                    <input type="text" class="form-control input-sm" placeholder="model" value="{{currentCar.model}}"
+                      #model>
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Manufacturer
+                    <input type="text" class="form-control input-sm" value="{{currentCar.manufacturer}}" #manufacturer>
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Year
+                    <input type="number" class="form-control input-sm" value="{{currentCar.manufacturerYear}}"
+                    min="0"
+                    oninput="validity.valid||(value='');"
+                      #manufacturerYear>
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    dayValue
+                    <input type="number" class="form-control input-sm" value="{{currentCar.dayValue}}" #dayValue
+                    min="0"
+                    oninput="validity.valid||(value='');">
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    lateDayValue
+                    <input type="number" class="form-control input-sm" value="{{currentCar.lateDayValue}}" #lateDayValue
+                    min="0"
+                    oninput="validity.valid||(value='');">
+                    {{errormsg}} 
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    CarType
+                    <input type="text" class="form-control input-sm" value="{{currentCar.carType}}" #carType>
+                    {{errormsg}}
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    CurrectMileage
+                    <input type="number" class="form-control input-sm" value="{{currentCar.currectMileage}}"
+                    min="0"
+                    oninput="validity.valid||(value='');"
+                      #currectMileage>
+                    {{errormsg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Available -
+                    <select #available value="{{currentCar.availableForRent}}">
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                    Proper -
+                    <select #proper value="{{currentCar.properForRent}}">
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                Gear
+                <select #gear value="{{currentCar.gearType}}">
+                  <option value="Automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                </select>
+              </div>
+              <div class="form-group">
+                Picture
+                <input type="text" class="form-control input-sm" value="{{currentCar.picture}}" #picture>
+              </div>
+              <input type="button" value="Save" class="btn btn-info btn-block"
+                (click)="editCar(carid.value,model.value, manufacturer.value,manufacturerYear.value,gear.value,dayValue.value,lateDayValue.value, carType.value, available.value, proper.value, currectMileage.value, picture.value)">
+              {{doneEdit}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input *ngIf="role === 'Admin'" type="button" value="Add New Car" class="btn btn-info " (click)="getAdd()">
+  <br><br />
+  <h1 *ngIf="!( role === 'Admin')"> You Don't Have Permission to Access this page!</h1>
+  <table *ngIf="role === 'Admin'" id="stock" style="width:80%" align="center">
+    <tr>
+      <th>Model</th>
+      <th>Manufacturer</th>
+      <th>GearType</th>
+      <th>Year</th>
+      <th>CurrectMileage</th>
+      <th>AvailableForRent</th>
+      <th>DayValue</th>
+      <th>Picture</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let i of arrInfoCars ">
+      <td>{{i.model}}</td>
+      <td>{{i.manufacturer}}</td>
+      <td>{{i.gearType}}</td>
+      <td>{{i.manufacturerYear}}</td>
+      <td>{{i.currectMileage}}Km</td>
+      <td>{{i.availableForRent}}</td>
+      <td>{{i.dayValue}} ₪</td>
+      <td *ngIf='!(i.picture == null ||i.picture == "null" || i.picture == "")'><img class="img" src="assets/{{i.picture}}"></td>
+      <td *ngIf='i.picture == null ||i.picture == "null" || i.picture == ""'><img class="img" src="assets/noimage.png"></td>
+      <td><img class="iconimg" src="assets/edit.png" (click)="getEdit(i)"></td>
+      <td><img class="iconimg" src="assets/delete.png" (click)="getDeleteCar(i)"></td>
+    </tr>
+  </table>
+</div>
